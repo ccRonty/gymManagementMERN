@@ -5,6 +5,7 @@ import "./App.css";
 import Home from "./Pages/Home/Home";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import Member from "./Pages/Member/Member";
 
 function App() {
   const navigate = useNavigate();
@@ -14,7 +15,9 @@ function App() {
     let isLoggedIn = sessionStorage.getItem("isLogin");
     if (isLoggedIn) {
       setIsLogin(true);
-      navigate("/dashboard");
+      // navigate("/dashboard");
+    } else {
+      navigate("/");
     }
   }, [sessionStorage.getItem("isLogin")]);
 
@@ -24,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/member" element={<Member />} />
       </Routes>
     </div>
   );
