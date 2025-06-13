@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { Link, useLocation } from "react-router-dom";
 // import SunnyIcon from "@mui/icons-material/Sunny";
 // import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Sidebar = () => {
   const [greeting, setGreeting] = useState("");
+  const location = useLocation(); // get the current page path url
 
   const greetingMsg = () => {
     const currentHour = new Date().getHours();
@@ -42,18 +44,32 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="mt-10 py-5 border-t-2 border-gray-700">
-        <div className="flex gap-2 font-semibold text-xl bg-slate-800 p-3 rounded-xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black mb-3">
+        <Link
+          to="/dashboard"
+          className={`flex gap-2 font-semibold text-xl bg-slate-800 p-3 text-white no-underline rounded-xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black mb-3 ${
+            location.pathname === "/dashboard"
+              ? "border-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+              : null
+          }`}
+        >
           <div>
             <HomeIcon />
           </div>
           <div>Dashboard</div>
-        </div>
-        <div className="flex gap-2 font-semibold text-xl bg-slate-800 p-3 rounded-xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black mb-3">
+        </Link>
+        <Link
+          to="/member"
+          className={`flex gap-2 font-semibold text-xl bg-slate-800 p-3 rounded-xl cursor-pointer text-white no-underline hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black mb-3 ${
+            location.pathname === "/member"
+              ? "border-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+              : null
+          }`}
+        >
           <div>
             <PeopleIcon />
           </div>
           <div>Members</div>
-        </div>
+        </Link>
         <div className="flex gap-2 font-semibold text-xl bg-slate-800 p-3 rounded-xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black mb-3">
           <div>
             <ExitToAppIcon />
