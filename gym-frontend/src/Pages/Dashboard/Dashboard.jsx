@@ -26,6 +26,10 @@ export const Dashboard = () => {
     };
   }, [accordionDashboard]);
 
+  const handleOnMenuClick = (value) => {
+    sessionStorage.setItem("func", value);
+  };
+
   return (
     <div className="w-3/4 text-black p-5 relative">
       <div className="w-full bg-slate-900 text-white rounded-lg flex p-3 justify-between items-center">
@@ -69,7 +73,11 @@ export const Dashboard = () => {
         </Link>
 
         {/* This is the card block */}
-        <div className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer">
+        <Link
+          to={"/specific/monthly"}
+          className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer"
+          onClick={() => handleOnMenuClick("monthlyJoined")}
+        >
           <div className="h-3 rounded-t-lg- bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           <div className="py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white">
             <SignalCellularAltIcon sx={{ color: "green", fontSize: "50px" }} />
@@ -77,10 +85,14 @@ export const Dashboard = () => {
               Monthly Joined
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* This is the card block */}
-        <div className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer">
+        <Link
+          to={"/specific/expiring-in-3-days"}
+          className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer"
+          onClick={() => handleOnMenuClick("threeDayExpire")}
+        >
           <div className="h-3 rounded-t-lg- bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           <div className="py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white">
             <AccessAlarmIcon sx={{ color: "red", fontSize: "50px" }} />
@@ -88,10 +100,14 @@ export const Dashboard = () => {
               Expiring within 3 days
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* This is the card block */}
-        <div className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer">
+        <Link
+          to={"/specific/expiring-in-7-days"}
+          className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer"
+          onClick={() => handleOnMenuClick("sevenDaysExpire")}
+        >
           <div className="h-3 rounded-t-lg- bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           <div className="py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white">
             <AccessAlarmIcon sx={{ color: "yellow", fontSize: "50px" }} />
@@ -99,19 +115,27 @@ export const Dashboard = () => {
               Expiring within 7 days
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* This is the card block */}
-        <div className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer">
+        <Link
+          to={"/specific/expired"}
+          className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer"
+          onClick={() => handleOnMenuClick("expired")}
+        >
           <div className="h-3 rounded-t-lg- bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           <div className="py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white">
             <ErrorIcon sx={{ color: "red", fontSize: "50px" }} />
             <p className="text-xl my-3 font-semibold font-mono">Expired</p>
           </div>
-        </div>
+        </Link>
 
         {/* This is the card block */}
-        <div className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer">
+        <Link
+          to={"/specific/inactive-members"}
+          className="w-full h-fit border-2 bg-white rounded-lg cursor-pointer"
+          onClick={() => handleOnMenuClick("inactiveMembers")}
+        >
           <div className="h-3 rounded-t-lg- bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           <div className="py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white">
             <RunningWithErrorsIcon sx={{ color: "brown", fontSize: "50px" }} />
@@ -119,7 +143,7 @@ export const Dashboard = () => {
               Inactive Members
             </p>
           </div>
-        </div>
+        </Link>
       </div>
 
       <div className="md:bottom-4 p-4 w-3/4 mb-4 md:mb-0 absolute bg-black text-white mt-20 rounded-xl text-xl">

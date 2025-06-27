@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddMembership = () => {
+  const [inputField, setInputField] = useState({
+    months: "",
+    price: "",
+  });
+
+  const handleOnChange = (e, name) => {
+    setInputField({ ...inputField, [name]: e.target.value });
+  };
+  console.log(inputField);
+
   return (
     <div className="text-black ">
       <div className="flex flex-wrap gap-5 items-center justify-center">
@@ -21,11 +31,19 @@ const AddMembership = () => {
           type="number"
           className="border-2 rounded-lg text-lg w-1/3 h-1/2 p-2"
           placeholder="Type number of months"
+          value={inputField.months}
+          onChange={(e) => {
+            handleOnChange(e, "months");
+          }}
         />
         <input
           type="number"
           className="border-2 rounded-lg text-lg w-1/3 h-1/2 p-2"
           placeholder="Enter membership price"
+          value={inputField.price}
+          onChange={(e) => {
+            handleOnChange(e, "price");
+          }}
         />
         <div className="text-lg border-2 p-1 mt-0 rounded-xl w-auto cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
           Add +

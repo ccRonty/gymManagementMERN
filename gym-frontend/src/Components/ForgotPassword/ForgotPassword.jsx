@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 
 const ForgotPassword = () => {
   const [emailSubmit, setEmailSubmit] = useState(false);
   const [otpValidate, setOtpValidate] = useState(false);
   const [buttonName, setButtonName] = useState("Submit Email Address");
+  const [inputField, setInputField] = useState({
+    email: "",
+    otp: "",
+    newPassword: "",
+  });
+
+  const handleOnChange = (e, name) => {
+    setInputField({ ...inputField, [name]: e.target.value });
+  };
+  console.log(inputField);
 
   const handleSubmit = () => {
     if (!emailSubmit) {
@@ -23,6 +33,8 @@ const ForgotPassword = () => {
           type="email"
           className="w-1/2 p-2 bg-light rounded-lg border-2 border-slate-400"
           placeholder="Enter Email"
+          value={inputField.email}
+          onChange={(e) => handleOnChange(e, "email")}
         />
       </div>
 
@@ -33,6 +45,8 @@ const ForgotPassword = () => {
             type="email"
             className="w-1/2 p-2 bg-light rounded-lg border-2 border-slate-400"
             placeholder="Enter OTP"
+            value={inputField.otp}
+            onChange={(e) => handleOnChange(e, "otp")}
           />
         </div>
       )}
@@ -44,6 +58,8 @@ const ForgotPassword = () => {
             type="email"
             className="w-1/2 p-2 bg-light rounded-lg border-2 border-slate-400"
             placeholder="Enter New Password"
+            value={inputField.newPassword}
+            onChange={(e) => handleOnChange(e, "newPassword")}
           />
         </div>
       )}
