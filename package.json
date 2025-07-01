@@ -1,0 +1,25 @@
+{
+  "name": "gymmanagementmern",
+  "version": "1.0.0",
+  "description": "Gym Management System MERN Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccRonty/gymManagementMERN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccRonty/gymManagementMERN/issues"
+  },
+  "homepage": "https://github.com/ccRonty/gymManagementMERN#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "nodemon": "^3.1.10"
+  }
+}
