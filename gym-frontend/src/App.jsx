@@ -8,21 +8,22 @@ import Sidebar from "./Components/Sidebar/Sidebar";
 import Member from "./Pages/Member/Member";
 import GeneralUser from "./Pages/GeneralUser/GeneralUser";
 import MemberDetails from "./Pages/MemberDetails/MemberDetails";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    let isLoggedIn = sessionStorage.getItem("isLogin");
+    let isLoggedIn = localStorage.getItem("isLogin");
     if (isLoggedIn) {
       setIsLogin(true);
-      // navigate("/dashboard");
+      navigate("/dashboard");
     } else {
       setIsLogin(false);
       navigate("/");
     }
-  }, [sessionStorage.getItem("isLogin")]);
+  }, [localStorage.getItem("isLogin")]);
 
   return (
     <div className="flex">

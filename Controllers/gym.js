@@ -2,6 +2,7 @@ const gymModel = require('../Models/gym');
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto');
 const nodemailer = require("nodemailer");
+const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
   try {
@@ -29,14 +30,22 @@ exports.register = async (req, res) => {
   }
 }
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: false, //as it is in local that's why we are setting false
+  sameSite: 'Lax'
+}
+
 exports.login = async (req, res) => {
   // console.log("login route")
   try {
     const { userName, password } = req.body;
     const gym = await gymModel.findOne({ userName });
     if (gym && await bcrypt.compareSync(password, gym.password)) {
-
-      res.json({ success: true, message: "Logging in successfull", gym })
+      const token = jwt.sign({ gymId: gym._id }, process.env.JWT_SecretKey);
+      // console.log("jwtToken ", token)
+      res.cookie("cookie_token", token, cookieOptions)
+      res.json({ success: true, message: "Logging in successfull", gym, token })
     } else {
       res.status(400).json({ success: false, message: "Wrong Credentials" });
     }
@@ -163,4 +172,14 @@ exports.resetPassword = async (req, res) => {
       error
     })
   }
+}
+
+exports.logout = async (req, res) => {
+  res.clearCookie('cookie_token', cookieOptions).json({ success: true, message: "Logout succesfull" })
+}
+
+//middleware
+exports.checking = (req, res) => {
+  // console.log("Here in checking")
+  console.log(req)
 }

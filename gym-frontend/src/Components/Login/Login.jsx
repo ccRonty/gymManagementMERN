@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [loginField, setLoginField] = useState({ userName: "", password: "" });
@@ -7,13 +9,31 @@ const Login = () => {
   const handleOnChange = (event, name) => {
     setLoginField({ ...loginField, [name]: event.target.value });
   };
-  console.log(loginField);
+  // console.log(loginField);
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    sessionStorage.setItem("isLogin", true);
-    navigate("/dashboard");
+  const handleLogin = async () => {
+    // sessionStorage.setItem("isLogin", true);
+    // navigate("/dashboard");
+    await axios
+      .post("http://localhost:4000/gym/login", loginField, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        // console.log(response);
+        localStorage.setItem("gymName", response.data.gym.gymName);
+        localStorage.setItem("gymPic", response.data.gym.profilePic);
+        localStorage.setItem("isLogin", true);
+        localStorage.setItem("token", response.data.token);
+
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        const errMsg = err.response.data.message;
+        // console.log(errMsg);
+        toast.error(errMsg);
+      });
   };
 
   return (
@@ -45,6 +65,7 @@ const Login = () => {
       >
         Login
       </div>
+      <ToastContainer />
     </div>
   );
 };

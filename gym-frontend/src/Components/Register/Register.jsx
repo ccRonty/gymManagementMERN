@@ -5,6 +5,7 @@ import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import axios from "axios";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
+import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
   const [forgotPass, setForgotPass] = useState(false);
@@ -48,6 +49,20 @@ const Register = () => {
       console.log(error);
       setLoaderImage(false);
     }
+  };
+
+  const handleRegister = async () => {
+    await axios
+      .post("http://localhost:4000/gym/register", inputField)
+      .then((response) => {
+        // console.log(response);
+        const successMsg = response.data.message;
+        toast.success(successMsg);
+      })
+      .catch((err) => {
+        const errMsg = err.response.data.error;
+        toast.error(errMsg);
+      });
   };
 
   return (
@@ -97,7 +112,10 @@ const Register = () => {
       )}
 
       <img src={inputField.profilePic} className="h-[200px] w-[250px]" />
-      <div className="p-2 mt-5 w-[100%] border-2 bg-slate-800 text-white mx-auto rounded-lg text-center text-lg hover:bg-black cursor-pointer">
+      <div
+        className="p-2 mt-5 w-[100%] border-2 bg-slate-800 text-white mx-auto rounded-lg text-center text-lg hover:bg-black cursor-pointer"
+        onClick={() => handleRegister()}
+      >
         Sign Up
       </div>
       <div
@@ -113,6 +131,7 @@ const Register = () => {
           header="Forgot Password"
         />
       )}
+      <ToastContainer />
     </div>
   );
 };
